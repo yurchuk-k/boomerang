@@ -2,20 +2,23 @@
 
 class Hero {
   constructor({
-    name = 'Anonimus',
+    name = "Anonimus",
     scores = 0,
-    lifes = 'Жизни: 💜💜💜',
+    lifes = "Жизни: 💜💜💜",
     bigscore = 0,
     position,
     boomerang,
+    direction,
   }) {
     this.name = name;
     this.scores = scores;
     this.lifes = lifes;
     this.bigscore = bigscore;
-    this.skin = '🤠';
+    this.skin = "🤠";
     this.position = position;
     this.boomerang = boomerang;
+    this.direction = direction;
+    this.positionY = 0;
   }
 
   moveLeft() {
@@ -29,6 +32,18 @@ class Hero {
   moveRight() {
     // Идём вправо.
     this.position += 1;
+  }
+
+  moveUp() {
+    if (this.positionY === 1) {
+      this.positionY -= 1;
+    }
+  }
+
+  moveDown() {
+    if (this.positionY === 0) {
+      this.positionY += 1;
+    }
   }
 
   attack() {

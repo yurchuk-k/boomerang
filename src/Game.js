@@ -1,13 +1,13 @@
-const readlineSync = require('readline-sync');
+const readlineSync = require("readline-sync");
 // Импортируем всё необходимое.
 // Или можно не импортировать,
 // а передавать все нужные объекты прямо из run.js при инициализации new Game().
 
-const Hero = require('./game-models/Hero');
-const Enemy = require('./game-models/Enemy');
+const Hero = require("./game-models/Hero");
+const Enemy = require("./game-models/Enemy");
 // const Boomerang = require('./game-models/Boomerang');
-const View = require('./View');
-const Boomerang = require('./game-models/Boomerang');
+const View = require("./View");
+const Boomerang = require("./game-models/Boomerang");
 
 // Основной класс игры.
 // Тут будут все настройки, проверки, запуск.
@@ -20,14 +20,23 @@ class Game {
     this.enemy = new Enemy(trackLength);
     this.view = new View(this);
     this.track = [];
+    this.track2 = [];
     this.regenerateTrack();
   }
 
   regenerateTrack() {
     // Сборка всего необходимого (герой, враг(и), оружие)
     // в единую структуру данных
-    this.track = new Array(this.trackLength).fill(' ');
+    this.track = new Array(this.trackLength).fill("_");
+    this.track2 = new Array(this.trackLength).fill("_");
+
     this.track[this.hero.position] = this.hero.skin;
+    if (this.hero.positionY === 0) {
+      this.track[this.hero.position] = this.hero.skin;
+    }
+    if (this.hero.positionY === 1) {
+      this.track2[this.hero.position] = this.hero.skin;
+    }
     this.track[this.enemy.position] = this.enemy.skin; // Добавьте эту строку
     if (
       this.hero.boomerang.position >= 0 &&
@@ -46,11 +55,11 @@ class Game {
   play() {
     // во время запуска игры выводится форма регистрации и присваивается имя игрока
     this.hero.name = readlineSync.question(
-      'Приветствуем Героя!\nВведи своё имя: ',
+      "Приветствуем Героя!\nВведи своё имя: "
     );
     process.stdin.resume();
     if (!this.hero.name) {
-      this.hero.name = 'Anonimus';
+      this.hero.name = "Anonimus";
     }
 
     setInterval(() => {
@@ -71,7 +80,10 @@ class Game {
   }
 
   handleCollisions() {
-    if (this.hero.position === this.enemy.position) {
+    if (
+      this.hero.position === this.enemy.position &&
+      this.enemy.positionY === 0
+    ) {
       this.hero.die();
     }
 
