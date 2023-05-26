@@ -1,7 +1,18 @@
 // Наш герой.
 
 class Hero {
-  constructor({ position, boomerang }) {
+  constructor({
+    name = 'Anonimus',
+    scores = 0,
+    lifes = 'Жизни: 💜💜💜',
+    bigscore = 0,
+    position,
+    boomerang,
+  }) {
+    this.name = name;
+    this.scores = scores;
+    this.lifes = lifes;
+    this.bigscore = bigscore;
     this.skin = '🤠';
     this.position = position;
     this.boomerang = boomerang;
@@ -10,6 +21,9 @@ class Hero {
   moveLeft() {
     // Идём влево.
     this.position -= 1;
+    if (this.position <= 2) {
+      this.position = 1;
+    }
   }
 
   moveRight() {
@@ -24,8 +38,8 @@ class Hero {
   }
 
   die() {
-    this.skin = '💀';
-    console.log('YOU ARE DEAD!💀');
+    this.skin = "💀";
+    console.log("YOU ARE DEAD!💀");
     process.exit();
   }
 }

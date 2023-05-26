@@ -11,6 +11,8 @@
     "play-sound": "^1.1.5",
     "sequelize": "^6.31.1",
     "sequelize-cli": "^6.6.0"
+    "readline-sync": "^1.4.10",
+    "sequelize": "^6.21.0"
   },
   "devDependencies": {
     "eslint": "^8.18.0",
