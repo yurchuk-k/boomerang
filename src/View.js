@@ -6,7 +6,7 @@ class View {
   }
 
   render() {
-    const yourTeamName = 'Elbrus';
+    const yourTeamName = 'TIGERS';
 
     // Тут всё рисуем.
     console.clear();
@@ -14,6 +14,7 @@ class View {
       `Наш герой: ${this.game.hero.name}\n${this.game.hero.lifes}\nТекущий счет: ${this.game.hero.scores}\n\n`
     );
     console.log(this.game.track.join(''));
+    console.log(this.game.track2.join(''));
     console.log('\n');
     if (this.game.hero.lifes === 0) {
       console.log(`Твой общий результат: ${this.game.hero.bigscore}`);

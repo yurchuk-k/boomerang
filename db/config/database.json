@@ -1,11 +1,12 @@
 {
   "development": {
-    "username": "kate",
+    "username": "marina",
     "password": "123456",
     "database": "user_score",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
+  "logging": false,
   "test": {
     "username": "root",
     "password": null,

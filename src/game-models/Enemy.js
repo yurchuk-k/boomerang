@@ -1,4 +1,5 @@
 // Враг.
+const player = require("play-sound")((opts = {}));
 
 class Enemy {
   constructor(trackLength) {
@@ -27,12 +28,13 @@ class Enemy {
   moveLeft() {
     setInterval(() => {
       this.position -= 1;
-    }, 1000);
+    }, 900);
   }
 
   die() {
+    // this.skin = '💥';
     this.position = '?';
-    console.log('Enemy is dead!');
+    // console.log('Enemy is dead!');
   }
 }
 

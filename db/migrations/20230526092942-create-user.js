@@ -12,11 +12,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT,
       },
-      rating: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-
-      },
       score: {
         allowNull: false,
         type: Sequelize.INTEGER,
