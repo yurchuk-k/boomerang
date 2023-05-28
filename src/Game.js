@@ -8,9 +8,19 @@ const Enemy = require('./game-models/Enemy');
 // const Boomerang = require('./game-models/Boomerang');
 const View = require('./View');
 const Boomerang = require('./game-models/Boomerang');
+const db = require('../db/models');
 
 // Основной класс игры.
 // Тут будут все настройки, проверки, запуск.
+
+(async () => {
+  try {
+    await db.sequelize.authenticate();
+    console.log('Connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
+})();
 
 class Game {
   constructor({ trackLength }) {
@@ -23,6 +33,22 @@ class Game {
     this.regenerateTrack();
   }
 
+  async name() {
+    const result = await db.user.findOrCreate({
+      where: { name: `${process.argv[2]}` },
+      defaults: { score: this.game.hero.scores },
+    });
+    return result;
+  }
+
+  async update() {
+    const res = await db.user.update(
+      { score: this.game.hero.scores },
+      { where: { name: `${process.argv[2]}` } },
+    );
+    return res;
+  }
+
   regenerateTrack() {
     // Сборка всего необходимого (герой, враг(и), оружие)
     // в единую структуру данных
@@ -30,18 +56,16 @@ class Game {
     this.track[this.hero.position] = this.hero.skin;
     this.track[this.enemy.position] = this.enemy.skin; // Добавьте эту строку
     if (
-      this.hero.boomerang.position >= 0 &&
-      this.hero.boomerang.position < this.trackLength
+      this.hero.boomerang.position >= 0
+      && this.hero.boomerang.position < this.trackLength
     ) {
       this.track[this.hero.boomerang.position] = this.hero.boomerang.skin;
     }
   }
 
-  check() {
-    if (this.hero.position === this.enemy.position) {
-      this.hero.die();
-    }
-  }
+  // check() {
+
+  // }
 
   play() {
     // во время запуска игры выводится форма регистрации и присваивается имя игрока
@@ -72,11 +96,26 @@ class Game {
 
   handleCollisions() {
     if (this.hero.position === this.enemy.position) {
-      this.hero.die();
+      this.regenerateTrack();
+      this.hero.position = 0;
+      this.hero.lifesCount -= 1;
+      if (this.hero.lifesCount === 2) {
+        this.hero.lifes = 'Жизни: 💜💜🖤';
+        this.enemy.position = 27;
+      }
+      if (this.hero.lifesCount === 1) {
+        this.hero.lifes = 'Жизни: 💜🖤🖤';
+        this.enemy.position = 25;
+      }
+      if (this.hero.lifesCount === 0) {
+        this.hero.lifes = 'Жизни: 🖤🖤🖤';
+        this.hero.die();
+      }
     }
 
     if (this.boomerang.position === this.enemy.position) {
       this.enemy.die();
+      this.hero.scores += 1;
       // Обнуляем позицию бумеранга после столкновения с врагом
       // this.boomerang.position = -1;
       this.enemy = new Enemy(this.trackLength); // Создаем нового врага

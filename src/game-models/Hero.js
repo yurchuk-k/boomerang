@@ -5,6 +5,7 @@ class Hero {
     name = 'Anonimus',
     scores = 0,
     lifes = 'Жизни: 💜💜💜',
+    lifesCount = 3,
     bigscore = 0,
     position,
     boomerang,
@@ -12,8 +13,9 @@ class Hero {
     this.name = name;
     this.scores = scores;
     this.lifes = lifes;
+    this.lifesCount = lifesCount;
     this.bigscore = bigscore;
-    this.skin = '🤠';
+    this.skin = '🐯';
     this.position = position;
     this.boomerang = boomerang;
   }
@@ -38,8 +40,8 @@ class Hero {
   }
 
   die() {
-    this.skin = "💀";
-    console.log("YOU ARE DEAD!💀");
+    this.skin = '🤕';
+    console.log('YOU ARE DEAD!🤕');
     process.exit();
   }
 }
