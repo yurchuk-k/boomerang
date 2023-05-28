@@ -1,4 +1,4 @@
-const readlineSync = require('readline-sync');
+const readlineSync = require("readline-sync");
 // Импортируем всё необходимое.
 // Или можно не импортировать,
 // а передавать все нужные объекты прямо из run.js при инициализации new Game().
@@ -29,8 +29,16 @@ class Game {
   regenerateTrack() {
     // Сборка всего необходимого (герой, враг(и), оружие)
     // в единую структуру данных
-    this.track = new Array(this.trackLength).fill(' ');
+    this.track = new Array(this.trackLength).fill("_");
+    this.track2 = new Array(this.trackLength).fill("_");
+
     this.track[this.hero.position] = this.hero.skin;
+    if (this.hero.positionY === 0) {
+      this.track[this.hero.position] = this.hero.skin;
+    }
+    if (this.hero.positionY === 1) {
+      this.track2[this.hero.position] = this.hero.skin;
+    }
     this.track[this.enemy.position] = this.enemy.skin; // Добавьте эту строку
 
     // this.track = new Array(this.trackLength).fill(' ');
@@ -54,7 +62,7 @@ class Game {
     );
     process.stdin.resume();
     if (!this.hero.name) {
-      this.hero.name = 'Anonimus';
+      this.hero.name = "Anonimus";
     }
 
     setInterval(() => {

@@ -1,5 +1,5 @@
 // Наш герой.
-
+const player = require("play-sound")((opts = {}));
 class Hero {
   constructor({ position, boomerang }) {
     this.position = position;
@@ -26,10 +26,23 @@ class Hero {
     this.position += 1;
   }
 
+  moveUp() {
+    if (this.positionY === 1) {
+      this.positionY -= 1;
+    }
+  }
+
+  moveDown() {
+    if (this.positionY === 0) {
+      this.positionY += 1;
+    }
+  }
+
   attack() {
     // Атакуем.
     this.boomerang.position = this.position + 1; // Устанавливаем начальную позицию бумеранга
     this.boomerang.fly();
+    player.play("./src/sounds/shot.wav");
   }
 
   die() {
