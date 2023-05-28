@@ -1,24 +1,16 @@
 // Наш герой.
 const player = require("play-sound")((opts = {}));
 class Hero {
-  constructor({
-    name = "Anonimus",
-    scores = 0,
-    lifes = "Жизни: 💜💜💜",
-    bigscore = 0,
-    position,
-    boomerang,
-    direction,
-  }) {
-    this.name = name;
-    this.scores = scores;
-    this.lifes = lifes;
-    this.bigscore = bigscore;
-    this.skin = "🤠̸̇̎/̸̄̿̅̎̎̅͆ ͆͆͆͆̔̿͞ ͆̅̿̄͞";
+  constructor({ position, boomerang }) {
     this.position = position;
     this.boomerang = boomerang;
-    this.direction = direction;
-    this.positionY = 0;
+    this.skin = '🐯';
+
+    this.name = 'Anonimus';
+    this.lifes = 'Жизни: 💜💜💜';
+    this.lifesCount = 3;
+    this.scores = 0;
+    this.bigscore = 0;
   }
 
   moveLeft() {
@@ -54,8 +46,8 @@ class Hero {
   }
 
   die() {
-    this.skin = "💀";
-    console.log("YOU ARE DEAD!💀");
+    this.skin = '🤕';
+    console.log('YOU ARE DEAD!💀');
     process.exit();
   }
 }
