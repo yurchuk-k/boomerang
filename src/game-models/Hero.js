@@ -1,5 +1,5 @@
 // Наш герой.
-var player = require("play-sound")((opts = {}));
+const player = require("play-sound")((opts = {}));
 class Hero {
   constructor({
     name = "Anonimus",
@@ -14,7 +14,7 @@ class Hero {
     this.scores = scores;
     this.lifes = lifes;
     this.bigscore = bigscore;
-    this.skin = "🤠";
+    this.skin = "🤠̸̇̎/̸̄̿̅̎̎̅͆ ͆͆͆͆̔̿͞ ͆̅̿̄͞";
     this.position = position;
     this.boomerang = boomerang;
     this.direction = direction;
@@ -50,7 +50,7 @@ class Hero {
     // Атакуем.
     this.boomerang.position = this.position + 1; // Устанавливаем начальную позицию бумеранга
     this.boomerang.fly();
-    player.play("./src/sounds/hit.wav");
+    player.play("./src/sounds/shot.wav");
   }
 
   die() {
