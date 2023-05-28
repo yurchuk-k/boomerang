@@ -50,6 +50,7 @@ class Hero {
     // Атакуем.
     this.boomerang.position = this.position + 1; // Устанавливаем начальную позицию бумеранга
     this.boomerang.fly();
+    player.play("./src/sounds/hit.wav");
   }
 
   die() {
