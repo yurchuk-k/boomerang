@@ -12,9 +12,6 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.TEXT,
     },
-    rating: {
-      type: DataTypes.INTEGER,
-    },
     score: {
       type: DataTypes.INTEGER,
     },
