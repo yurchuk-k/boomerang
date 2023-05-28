@@ -1,5 +1,5 @@
 // Наш герой.
-
+var player = require("play-sound")((opts = {}));
 class Hero {
   constructor({
     name = "Anonimus",
