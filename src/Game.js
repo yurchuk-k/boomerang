@@ -8,6 +8,7 @@ const Enemy = require('./game-models/Enemy');
 const Boomerang = require('./game-models/Boomerang');
 const View = require('./View');
 
+const player = require("play-sound")((opts = {}));
 const { User } = require('../db/models');
 // const runInteractiveConsole = require('./keyboard');
 
@@ -29,8 +30,8 @@ class Game {
   regenerateTrack() {
     // Сборка всего необходимого (герой, враг(и), оружие)
     // в единую структуру данных
-    this.track = new Array(this.trackLength).fill("_");
-    this.track2 = new Array(this.trackLength).fill("_");
+    this.track = new Array(this.trackLength).fill(' ');
+    this.track2 = new Array(this.trackLength).fill(' ');
 
     this.track[this.hero.position] = this.hero.skin;
     if (this.hero.positionY === 0) {
@@ -87,17 +88,15 @@ class Game {
     await User.findOrCreate({
       where: { name: this.hero.name },
       defaults: { score: this.hero.scores },
+      logging: false,
     });
 
-    // const newUser = await User.findOne({
-    //   where: { name: this.hero.name },
-    // })
-
-    // if (newUser
     await User.update(
       { score: this.hero.scores },
-      { where: { name: this.hero.name } }
+      { where: { name: this.hero.name } },
+      { logging: false },
     );
+    // logging: false,
   }
 
   async handleCollisions() {
@@ -109,20 +108,24 @@ class Game {
 
       if (this.hero.lifesCount === 2) {
         this.hero.lifes = 'Жизни: 💜💜🖤';
+        player.play('./src/sounds/hit.wav');
         this.enemy.position = 27;
       }
       if (this.hero.lifesCount === 1) {
         this.hero.lifes = 'Жизни: 💜🖤🖤';
+        player.play('./src/sounds/hit.wav');
         this.enemy.position = 25;
       }
       if (this.hero.lifesCount === 0) {
         this.hero.lifes = 'Жизни: 🖤🖤🖤';
+        player.play('./src/sounds/death.wav');
         await this.dieHero();
         this.hero.die();
       }
     }
 
     if (this.boomerang.position >= this.enemy.position) {
+      player.play('./src/sounds/death.wav');
       this.enemy.die();
       this.hero.scores += 1;
       // Обнуляем позицию бумеранга после столкновения с врагом

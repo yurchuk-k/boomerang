@@ -9,9 +9,6 @@ class Boomerang {
     this.position = undefined; // оставить так, бумеранг не будет видно в начале
     this.trackLength = trackLength;
     this.generateSkin();
-
-    // * this.position = 1;
-    // ? this.direction = 'right';
   }
 
   generateSkin() {

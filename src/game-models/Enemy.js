@@ -1,4 +1,5 @@
 // Враг.
+const player = require("play-sound")((opts = {}));
 
 class Enemy {
   constructor(trackLength) {
