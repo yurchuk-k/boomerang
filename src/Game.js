@@ -35,7 +35,7 @@ class Game {
 
   async name() {
     const result = await db.user.findOrCreate({
-      where: { name: ${process.argv[2]} },
+      where: { name: `${process.argv[2]}` },
       defaults: { score: this.game.hero.scores },
     });
     return result;
@@ -44,7 +44,7 @@ class Game {
   async update() {
     const res = await db.user.update(
       { score: this.game.hero.scores },
-      { where: { name: ${process.argv[2]} } },
+      { where: { name: `${process.argv[2]}` } },
     );
     return res;
   }

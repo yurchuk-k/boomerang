@@ -30,14 +30,14 @@ class Boomerang {
     this.position = -1; // Сброс позиции бумеранга
   }
 
-  moveLeft(distance) {
+  moveLeft() {
     // Идём влево.
-    this.position -= distance;
+    this.position -= 1;
   }
 
-  moveRight(distance) {
+  moveRight() {
     // Идём вправо.
-    this.position += distance;
+    this.position += 1;
   }
 }
 

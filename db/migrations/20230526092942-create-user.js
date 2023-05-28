@@ -12,13 +12,15 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT,
       },
-      rating_id: {
+      rating: {
         allowNull: false,
         type: Sequelize.INTEGER,
-        references: {
-          model: 'Ratings',
-          key: 'id',
-        },
+
+      },
+      score: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+
       },
       createdAt: {
         allowNull: false,
