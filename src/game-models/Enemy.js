@@ -4,21 +4,40 @@ class Enemy {
   constructor(trackLength) {
     this.generateSkin();
     this.position = trackLength - 1;
+    this.positionY = trackLength - 1;
   }
 
   generateSkin() {
-    const skins = ['👾', '💀', '👹', '👻', '👽', '👿', '💩', '🤡', '🤺', '🧛', '🧟', '🎃'];
+    const skins = [
+      '👾',
+      '💀',
+      '👹',
+      '👻',
+      '👽',
+      '👿',
+      '💩',
+      '🤡',
+      '🤺',
+      '🧛',
+      '🧟',
+      '🎃',
+    ];
     this.skin = skins[Math.floor(Math.random() * skins.length)];
   }
 
   moveLeft() {
-    // Идём влево.
-    this.position -= 1;
+    setInterval(() => {
+      this.position -= 1;
+    }, 400);
+    setInterval(() => {
+      this.positionY -= 1;
+    }, 1000);
   }
 
   die() {
     this.position = '?';
-    console.log('Enemy is dead!');
+    this.positionY = '?';
+    // console.log('Enemy is dead!');
   }
 }
 

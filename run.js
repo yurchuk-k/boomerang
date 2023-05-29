@@ -5,7 +5,7 @@ const runInteractiveConsole = require('./src/keyboard');
 
 // Инициализация игры с настройками.
 const game = new Game({
-  trackLength: 30,
+  trackLength: 50,
 });
 
 // Запуск игры.
