@@ -1,12 +1,12 @@
 // Бумеранг является оружием.
 // В дальнейшем можно добавить другое оружие.
 // Тогда можно будет создать класс Weapon и воспользоваться наследованием!
-const Hero = require('./Hero');
 
 class Boomerang {
   constructor(trackLength) {
     this.skin = '🪃';
     this.position = undefined; // оставить так, бумеранг не будет видно в начале
+    this.positionY = undefined;
     this.trackLength = trackLength;
     this.generateSkin();
   }
@@ -31,25 +31,23 @@ class Boomerang {
 
     // Сбрасываем позицию бумеранга после возвращения
     setTimeout(() => this.reset(), 25 * (distance * 2));
-
-    // ? this.moveRight();
-    // ? this.moveLeft();
   }
 
   reset() {
     this.position = undefined; // Сброс позиции бумеранга
-    // this.position = -1; // Сброс позиции бумеранга
-    // this.position = 1; // Сброс позиции бумеранга
+    this.positionY = undefined; // Сброс позиции бумеранга
   }
 
   moveLeft() {
     // Идём влево.
     this.position -= 1;
+    this.positionY -= 1;
   }
 
   moveRight() {
     // Идём вправо.
     this.position += 1;
+    this.positionY += 1;
   }
 }
 
